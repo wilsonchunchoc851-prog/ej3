@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo: Grid, Carrusel y Responsive</title>
+    <style>
+        /* Estilos generales */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* 1. DISEÑO CON CSS GRID (Estructura principal) */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 250px 1fr; /* Barra lateral y contenido principal */
+            grid-template-rows: auto 1fr auto; /* Cabecera, contenido, pie */
+            min-height: 100vh;
+            gap: 15px;
+            padding: 15px;
+        }
+
+        header {
+            grid-column: 1 / -1;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        aside {
+            background-color: #34495e;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        main {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            grid-column: 1 / -1;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        /* 2. CARRUSEL SENCILLO CON CSS */
+        .carrusel {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto 10px auto;
+            overflow: hidden; /* Oculta lo que sale del contenedor */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .carrusel-track {
+            display: flex;
+            width: 300%; /* Ancho para las 3 imágenes */
+            animation: desplazar 12s infinite; /* Animación automática para el ejemplo */
+        }
+
+        .carrusel img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        /* Animación simple del carrusel */
+        @keyframes desplazar {
+            0% { transform: translateX(0); }
+            30% { transform: translateX(0); }
+            35% { transform: translateX(-33.333%); }
+            65% { transform: translateX(-33.333%); }
+            70% { transform: translateX(-66.666%); }
+            95% { transform: translateX(-66.666%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* 3. BARRA DE NAVEGACIÓN HORIZONTAL (Abajo del carrusel) */
+        .nav-horizontal {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 6px;
+        }
+
+        .nav-horizontal a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-horizontal a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        /* 4. DISEÑO RESPONSIVE (MEDIA QUERIES) */
+        /* Si la pantalla es menor a 768px (tablets y celulares) */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr; /* El grid pasa a una sola columna */
+            }
+
+            aside {
+                display: none; /* Ocultamos el menú lateral en celulares por espacio */
+            }
+
+            .carrusel img {
+                height: 200px; /* Reducimos la altura del carrusel en móviles */
+            }
+
+            .nav-horizontal {
+                flex-direction: column; /* En celulares los botones se ponen en columna para facilitar el toque */
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-container">
+        <!-- Cabecera -->
+        <header>
+            <h1>Mi Sitio Web Responsive</h1>
+        </header>
+
+        <!-- Menú Lateral -->
+        <aside>
+            <h3>Menú Principal</h3>
+            <p>Inicio</p>
+            <p>Galería</p>
+            <p>Contacto</p>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main>
+            <h2>Bienvenido a la página de prácticas</h2>
+            <p>Este ejemplo integra una estructura de Grid, un carrusel visual y una barra de navegación horizontal abajo.</p>
+
+            <!-- Carrusel de imágenes -->
+            <div class="carrusel">
+                <div class="carrusel-track">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4VQ1NTQEAw5h7IzISzIxGFCtsaMcDJJoCxxZWxrCdzA&s=10" alt="Paisaje 1">
+                    <img src="https://es.pinterest.com/pin/655414551995317606/visual-search/?x=0&y=0&w=1&h=0.935&cropSource=9&entrypoint=closeup_image_cutout" alt="Paisaje 2">
+                    <img src="https://i.pinimg.com/vwebp/736x/12/41/16/124116cdda68c2ceca19cdd43773a8b9.webp" alt="Paisaje 3">
+                </div>
+            </div>
+
+            <!-- Barra de navegación horizontal abajo del carrusel -->
+            <nav class="nav-horizontal">
+                <a href="#">Ver Detalles</a>
+                <a href="#">Siguiente Sección</a>
+                <a href="#">Compartir</a>
+                <a href="#">Ayuda</a>
+            </nav>
+        </main>
+
+        <!-- Pie de página -->
+        <footer>
+            <p>Derechos Reservados 2026</p>
+        </footer>
+    </div>
+
+</body>
+</html>
